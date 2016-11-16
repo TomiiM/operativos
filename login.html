@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Inicia Sesion Kaahal</title>
+	<link rel="stylesheet" href="C:\wamp\www\operativos\css\style-login.css">
+
+    <!-- CSS -->
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=PT+Sans:400,700'>
+        <link rel="stylesheet" href="C:\wamp\www\operativos\css\reset.css">
+        <link rel="stylesheet" href="C:\wamp\www\operativos\css\supersized.css">
+        <link rel="stylesheet" href="C:\wamp\www\operativos\css\style.css">
+
+        <script>  
+(function(d,s,id) {  
+    var js, fjs = d.getElementsByTagName(s)[0];  
+    if(d.getElementById(id)) return;  
+    js = d.createElement(s); js.id = id;  
+    js.src = "http://connect.facebook.net/es_ES/sdk.js";  
+    fjs.parentNode.insertBefore(js, fjs);  
+}(document, 'script', 'facebook-jssdk'));  
+window.fbAsyncInit = function() {  
+    FB.init({  
+        appId    : '359400847746387',  
+        cookie   : true,  
+        xfbml    : true,  
+        version  : 'v2.0'  
+    });  
+}  
+
+	function ingresar() {  
+                FB.login(function(response){  
+                    validarUsuario();  
+                }, {scope: 'public_profile, email'});  
+            }  
+            function validarUsuario() {  
+                FB.getLoginStatus(function(response) {  
+                    if(response.status == 'connected') {  
+                        FB.api('/me', function(response) {  
+                            alert('Hola ' + response.name);  
+                        });  
+                    } else if(response.status == 'not_authorized') {  
+                        alert('Debes autorizar la app!');  
+                    } else {  
+                        alert('Debes ingresar a tu cuenta de Facebook!');  
+                    }  
+                });  
+           }  
+</script>
+
+
+</head>
+<body background="C:\wamp\www\operativos\Media\logiin.jpeg">
+		    	 <fb:login-button scope="public_profile,email" onlogin="validarUsuario();"></fb:login-button>
+		<script src="https://www.gstatic.com/firebasejs/3.6.1/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyC-2-ESiv-uDDMAF03rpVqvDrUJ9L7KyeM",
+		    authDomain: "kaahal-4f2a6.firebaseapp.com",
+		    databaseURL: "https://kaahal-4f2a6.firebaseio.com",
+		    storageBucket: "kaahal-4f2a6.appspot.com",
+		    messagingSenderId: "512525759608"
+		  };
+		  firebase.initializeApp(config);
+		</script>
+		
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> </fb:login-button>  
+        <button onclick="ingresar();">Ingresar con Facebook</button> 
+	<img src="C:\wamp\www\operativos\Media\logotipo.png" id="imgo">
+	<div class="login-form">
+    	 <h1>Iniciar Sesion</h1>
+     	 <div class="form-group ">
+     	  	 <input type="text" class="form-control" placeholder="Usuario " id="UserName">
+       		 <i class="fa fa-user"></i>
+     	</div>
+     	<div class="form-group log-status">
+       		 <input type="password" class="form-control" placeholder="Contraseña" id="Passwod">
+       		<i class="fa fa-lock"></i>
+    	 </div>
+ 	     <span class="alert">Datos introducidos no coinciden</span>
+ 	     <a class="link" href="#">Olvidaste tu contraseña?</a>
+    	 <button type="button" class="log-btn" >Entrar</button>
+   </div>
+ 
+
+</body>
+</html>
